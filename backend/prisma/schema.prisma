@@ -23,9 +23,21 @@ enum VisibilityRange {
   R_300M
 }
 
+enum CameraResolution {
+  R_144P
+  R_240P
+  R_360P
+  R_480P
+  R_720P
+  R_1080P
+  R_2K
+  R_4K
+}
+
 model Camera {
   id              Int             @id @default(autoincrement())
   visibilityRange VisibilityRange @default(R_100M)
+  resolution      CameraResolution@default(R_720P)
   owner           User            @relation(fields: [ownerId], references: [id])
   ownerId         Int
 }
