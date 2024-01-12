@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx"
-  }
+  },
+  "lib": ["es6.promise"]
 }
