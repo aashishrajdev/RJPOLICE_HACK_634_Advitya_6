@@ -18,7 +18,9 @@ import {
   Route,
   RootRoute,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import { Map } from "./map/map";
+
+//import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 // Import your publishable key
 
@@ -91,6 +93,9 @@ const appRoute = new Route({
           <Link to="/app/about" className="[&.active]:font-bold">
             About
           </Link>
+          <Link to="/app/map" className="[&.active]:font-bold">
+            Map
+          </Link>
         </nav>
         <div className="col-span-6 border-l">
           <Outlet />
@@ -120,12 +125,27 @@ const aboutRoute = new Route({
   },
 });
 
+const mapRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "/map",
+  component: function MapPage() {
+    return (
+      <div className="">
+        <Map
+          coords={{ latitude: 28.605875, longitude: 77.369809 }}
+          display_name="Noida"
+        />
+      </div>
+    );
+  },
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   // rootRoute,
   signInRoute,
   signUpRoute,
-  appRoute.addChildren([aboutRoute, homeRoute]),
+  appRoute.addChildren([aboutRoute, homeRoute, mapRoute]),
 ]);
 
 const router = new Router({ routeTree });

@@ -35,10 +35,9 @@ enum CameraResolution {
 }
 
 model Camera {
-  id              Int             @id @default(autoincrement())
-  visibilityRange VisibilityRange @default(R_100M)
-  resolution      CameraResolution@default(R_720P)
-  owner           User            @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  id              Int              @id @default(autoincrement())
+  visibilityRange VisibilityRange  @default(R_100M)
+  resolution      CameraResolution @default(R_720P)
+  owner           User             @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   ownerId         Int
-
 }
