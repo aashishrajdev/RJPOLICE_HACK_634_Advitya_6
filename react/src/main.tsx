@@ -18,11 +18,19 @@ import {
   Route,
   RootRoute,
 } from "@tanstack/react-router";
-import { Map } from "./map/map";
+import { Map } from "./map/syncfusion-map";
+// import { Map } from "./map/leaflet-map";
 
 //import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 // Import your publishable key
+
+import { registerLicense } from "@syncfusion/ej2-base";
+
+// Registering Syncfusion license key
+registerLicense(
+  "Ngo9BigBOggjHTQxAR8/V1NAaF5cWWJCfEx3Rnxbf1x0ZFBMY1VbR3BPIiBoS35RckViWHtfd3BWQmhYUEJ+"
+);
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -130,11 +138,12 @@ const mapRoute = new Route({
   path: "/map",
   component: function MapPage() {
     return (
-      <div className="">
-        <Map
+      <div className="min-h-screen ">
+        <Map />
+        {/* <Map
           coords={{ latitude: 28.605875, longitude: 77.369809 }}
           display_name="Noida"
-        />
+        /> */}
       </div>
     );
   },

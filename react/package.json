@@ -20,6 +20,8 @@
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
+    "@syncfusion/ej2-react-grids": "^24.1.45",
+    "@syncfusion/ej2-react-maps": "^24.1.41",
     "@tanstack/react-router": "^1.4.2",
     "@tanstack/router-devtools": "^1.4.2",
     "class-variance-authority": "^0.7.0",

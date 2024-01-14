@@ -40,4 +40,6 @@ model Camera {
   resolution      CameraResolution @default(R_720P)
   owner           User             @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   ownerId         Int
+  latitude        Float
+  longitude       Float
 }
