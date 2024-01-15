@@ -106,22 +106,36 @@ app.delete("/camera/:id", async (c) => {
   }
 });
 
-type camerabody = Omit<Camera, "id">;
+// ...
+
+type CameraBody = Omit<Camera, "id"> & {
+  ownerId: number;
+  latitude?: number;
+  longitude?: number;
+};
 
 app.post("/camera", async (c) => {
   try {
-    const body = await c.req.json<camerabody>();
-    const { ownerId, visibilityRange, resolution } = body;
+    const body = await c.req.json<CameraBody>();
+    const { ownerId, visibilityRange, resolution, latitude, longitude } = body;
+
     let camera: any;
     if (visibilityRange && resolution) {
       camera = await db.camera.create({
-        data: { ownerId: Number(ownerId), visibilityRange, resolution },
+        data: {
+          ownerId: Number(ownerId),
+          visibilityRange,
+          resolution,
+          latitude,
+          longitude,
+        },
       });
     } else {
       camera = await db.camera.create({
-        data: { ownerId: Number(ownerId) },
+        data: { ownerId: Number(ownerId), latitude, longitude },
       });
     }
+
     return c.json({ data: camera });
   } catch (error) {
     //@ts-ignore
