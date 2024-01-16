@@ -6,7 +6,7 @@ import { Camera } from "@prisma/client";
 //
 const app = new Hono();
 app.use("*", cors({ origin: ["http://localhost:5173"] }));
-app.get("/", (c) => c.text("Hello Hono!"));
+app.get("/", (c) => c.text("This is the backend server ! 🚀"));
 
 app.get("/add", (c) => c.json({ hello: "world" }));
 
@@ -49,17 +49,40 @@ app.get("/user/camera/:id", async (c) => {
 
 app.post("/user", async (c) => {
   try {
-    const body = await c.req.json<{ email: string; name: string }>();
-    const { email, name } = body;
+    const body = await c.req.json<{
+      email: string;
+      name: string;
+      contact: number; // Mandatory contact field
+      aadhar: number; // Mandatory aadhar field
+    }>();
+
+    // Perform additional validation in your application code
+    if (!isValidContact(body.contact) || !isValidAadhar(body.aadhar)) {
+      return c.json({ error: "Invalid contact or aadhar" });
+    }
+
+    const { email, name, contact, aadhar } = body;
+
     const user = await db.user.create({
-      data: { email: email, name: name },
+      data: { email, name, contact, aadhar },
     });
+
     return c.json({ data: user });
   } catch (error) {
     //@ts-ignore
     return c.json({ error: error.message });
   }
 });
+
+function isValidContact(contact: number): boolean {
+  // Perform your contact validation logic here
+  return String(contact).length === 10;
+}
+
+function isValidAadhar(aadhar: number): boolean {
+  // Perform your aadhar validation logic here
+  return String(aadhar).length === 12;
+}
 
 app.get("/users", async (c) => {
   try {
