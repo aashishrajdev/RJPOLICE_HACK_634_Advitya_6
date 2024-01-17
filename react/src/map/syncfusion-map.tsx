@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   MapsComponent,
   LayersDirective,
   LayerDirective,
-  Inject,
   Zoom,
+  MarkersDirective,
+  MarkerDirective,
+  Marker,
+  Inject,
 } from "@syncfusion/ej2-react-maps";
 
 export function Map() {
@@ -13,17 +17,34 @@ export function Map() {
         enable: true,
         toolbars: ["Zoom", "ZoomIn", "ZoomOut", "Pan", "Reset"],
       }}
-      style={{
-        position: "absolute",
-        top: "0",
-        bottom: "0",
-        left: "0",
-        right: "0",
+      centerPosition={{
+        latitude: 26.632249315117004,
+        longitude: 76.46834997581011,
       }}
     >
-      <Inject services={[Zoom]} />
+      <Inject services={[Marker, Zoom]} />
       <LayersDirective>
-        <LayerDirective urlTemplate="https://tile.openstreetmap.org/level/tileX/tileY.png" />
+        <LayerDirective urlTemplate="https://tile.openstreetmap.org/level/tileX/tileY.png">
+          <MarkersDirective>
+            <MarkerDirective
+              visible={true}
+              height={25}
+              width={15}
+              dataSource={[
+                {
+                  latitude: 26.6322,
+                  longitude: 76.468,
+                  name: "Kota",
+                },
+                {
+                  latitude: 26.4499,
+                  longitude: 74.6399,
+                  name: "Ajmer",
+                },
+              ]}
+            ></MarkerDirective>
+          </MarkersDirective>
+        </LayerDirective>
       </LayersDirective>
     </MapsComponent>
   );
