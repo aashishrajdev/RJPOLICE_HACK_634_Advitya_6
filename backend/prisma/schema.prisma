@@ -15,7 +15,6 @@ model User {
   email   String   @unique
   name    String
   contact Int     @unique
-  aadhar  Int     @unique
   cameras Camera[]
 }
 

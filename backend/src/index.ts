@@ -52,19 +52,25 @@ app.post("/user", async (c) => {
     const body = await c.req.json<{
       email: string;
       name: string;
-      contact: number; // Mandatory contact field
-      aadhar: number; // Mandatory aadhar field
+      contact: string; // Keep it as a string
     }>();
 
     // Perform additional validation in your application code
-    if (!isValidContact(body.contact) || !isValidAadhar(body.aadhar)) {
-      return c.json({ error: "Invalid contact or aadhar" });
+    if (!isValidContact(body.contact)) {
+      return c.json({ error: "Invalid contact" });
     }
 
-    const { email, name, contact, aadhar } = body;
+    const { email, name } = body;
+    const contact = Number(body.contact); // Convert back to number
+
+    // Check if a user with the same email already exists
+    const existingUser = await db.user.findUnique({ where: { email } });
+    if (existingUser) {
+      return c.json({ error: "A user with this email already exists" });
+    }
 
     const user = await db.user.create({
-      data: { email, name, contact, aadhar },
+      data: { email, name, contact }, // Include contact
     });
 
     return c.json({ data: user });
@@ -74,14 +80,9 @@ app.post("/user", async (c) => {
   }
 });
 
-function isValidContact(contact: number): boolean {
+function isValidContact(contact: string): boolean {
   // Perform your contact validation logic here
-  return String(contact).length === 10;
-}
-
-function isValidAadhar(aadhar: number): boolean {
-  // Perform your aadhar validation logic here
-  return String(aadhar).length === 12;
+  return contact.length === 10 && /^\d+$/.test(contact); // Checks for 10 digits
 }
 
 app.get("/users", async (c) => {
