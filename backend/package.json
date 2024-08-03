@@ -9,11 +9,11 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.3.3",
-    "@prisma/client": "^5.7.1",
+    "@prisma/client": "^5.17.0",
     "hono": "^3.11.8"
   },
   "devDependencies": {
-    "prisma": "^5.7.1",
+    "prisma": "^5.17.0",
     "tsx": "^3.12.2"
   }
 }

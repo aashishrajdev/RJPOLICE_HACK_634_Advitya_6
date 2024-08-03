@@ -15,8 +15,8 @@ class Camera:
 
 def send_notification(phone_number, message):
     # Replace "YOUR_VONAGE_API_KEY" and "YOUR_VONAGE_API_SECRET" with your actual Vonage API key and secret
-    vonage_api_key = "API_KEY"
-    vonage_api_secret = "SECRET_KEY"
+    vonage_api_key = "3ced04b9"
+    vonage_api_secret = "sp7UqtPuqz39ELn9"
 
     # Create Vonage client
     client = Client(key=vonage_api_key, secret=vonage_api_secret)

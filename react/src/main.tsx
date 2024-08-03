@@ -94,7 +94,7 @@ const appRoute = new Route({
   component: function AppPage() {
     return (
       <main className="grid grid-cols-7 min-h-screen">
-        <nav className="flex flex-col gap-3 bg-secondary">
+        <nav className="flex flex-col gap-3 linear-gradient(0deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.60) 100%), linear-gradient(136deg, rgba(252, 73, 73, 0.24) 49.52%, rgba(83, 56, 248, 0.10) 51.87%, rgba(16, 64, 255, 0.00) 77.07%, rgba(98, 27, 39, 0.00) 77.07%)">
           <Link to="/app/" className="[&.active]:font-bold">
             Home
           </Link>{" "}
@@ -117,9 +117,18 @@ const homeRoute = new Route({
   getParentRoute: () => appRoute,
   path: "/",
   component: function Index() {
+    const containerStyle = {
+      backgroundImage:
+        "linear-gradient(0deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.60) 100%), linear-gradient(136deg, rgba(252, 73, 73, 0.24) 49.52%, rgba(83, 56, 248, 0.10) 51.87%, rgba(16, 64, 255, 0.00) 77.07%, rgba(98, 27, 39, 0.00) 77.07%)",
+    };
+
     return (
-      <div className="p-2">
-        <h3>Welcome Home!</h3>
+      <div
+        style={containerStyle}
+        className="flex flex-col justify-center items-center h-screen bg-gray-200"
+      >
+        <h3 className="text-4xl font-bold text-black mb-4">Rajasthan Police</h3>
+        <h2 className="text-4xl font-bold text-black">CCTV Monitoring Panel</h2>
       </div>
     );
   },
@@ -129,7 +138,47 @@ const aboutRoute = new Route({
   getParentRoute: () => appRoute,
   path: "/about",
   component: function About() {
-    return <div className="p-2">Hello from About!</div>;
+    const containerStyle = {
+      backgroundImage:
+        "linear-gradient(0deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.60) 100%), linear-gradient(136deg, rgba(252, 73, 73, 0.24) 49.52%, rgba(83, 56, 248, 0.10) 51.87%, rgba(16, 64, 255, 0.00) 77.07%, rgba(98, 27, 39, 0.00) 77.07%)",
+    };
+
+    return (
+      <div
+        style={containerStyle}
+        className="flex flex-col justify-center items-center h-screen bg-gray-200"
+      >
+        <h3 className="text-4xl font-bold text-black mb-4">
+          Welcome to our CCTV Monitoring Portal
+        </h3>
+        <h2 className="text-4xl font-bold text-black">
+          Developed for the Rajasthan Police Hackathon!
+        </h2>
+
+        <div
+          className="text-center"
+          style={{
+            width: 574,
+            height: 469,
+            color: "white",
+            fontSize: 30,
+            fontFamily: "Montserrat",
+            fontWeight: "500",
+            wordWrap: "break-word",
+          }}
+        >
+          Welcome to our CCTV Monitoring Portal, developed for the Rajasthan
+          Police Hackathon!
+          <br />
+          <br />
+          Our cutting-edge web portal is designed to enhance surveillance
+          capabilities, providing real-time monitoring and analysis of CCTV
+          feeds. With a user-friendly interface, our solution empowers law
+          enforcement agencies to maintain public safety and respond swiftly to
+          potential threats.
+        </div>
+      </div>
+    );
   },
 });
 
